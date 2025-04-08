@@ -1,0 +1,65 @@
+Create and setup database
+Create model select, migration and controller
+
+Setup summernote
+1. Include the cdn
+2. Create form
+3. Script
+
+For storing to database
+    code snippet:
+        $content = $request->content;
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($content, 9);
+
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img) {
+            $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
+            $image_name = "/upload/" . time(). $key.'png';
+            file_put_contents(public_path().$image_name, $data);
+
+            $img->removeAttribute('src');
+            $img->setAttribute('src',$image_name);
+        }
+
+        $content = $dom->saveHTML();
+
+        BlogMi::create([
+            'title' => $request->title,
+            'content' => $content
+        ]);
+
+For dispplaying the blog:
+1. In controller
+    $vars = ControllerName::all();
+    return view('webpageFilename', compact('vars'));
+2. In blade:
+    foreach loop ($vars as $var)
+    {{ $var->name }}
+    {{ $var->id}}
+3. In route pass the id
+4. In another function in controller, to search for specific and displayin  the contents.
+    $var = ControllerName::find($id);
+    return view('webpageFilename', compact('post'));
+5. Creaate blade for displaying the coontents
+    {{!! $var->content !!}}
+
+
+For editing and updating the blog:
+1. Create route for edit and pass id
+2. In controller, create class for edit then pass the id inside the parameter
+    use find() and pass the searched item
+3. Create blade for editing.
+    pass the id to the form
+4. cReate riute for update
+    pass id and use find()
+    copy the same cod from store class expcept
+    make the storing function to update()
+    check if the image is a new one with this code:
+        if (strpos($img->getAttribute('src'),'data:images/')===0){
+            //put the image code here
+        }
+
+    lastly, return redirect('/');

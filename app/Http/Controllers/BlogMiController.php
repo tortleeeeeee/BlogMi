@@ -94,7 +94,7 @@ class BlogMiController extends Controller
 
         $content = $request->content;
 
-        Log::info('Blog content received:', ['content' => substr($content, 0, 500)]);  // Logs first 500 characters to avoid large logs
+        Log::info('Blog content received:', ['content' => substr($content, 0, 1000)]);  // Logs first 500 characters to avoid large logs
 
         $dom = new DOMDocument();
         $dom->loadHTML($content, 9);
@@ -103,7 +103,7 @@ class BlogMiController extends Controller
         $images = $dom->getElementsByTagName('img');
 
         foreach ($images as $key => $img) {
-            if (strpos($img->getAttribute('src'),'data:images/')===0){
+            if (strpos($img->getAttribute('src'),'data:images/') ===0){
                 $data = base64_decode(explode(',',explode(';',$img->getAttribute('src'))[1])[1]);
                 $image_name = "/upload/" . time(). $key.'png';
                 file_put_contents(public_path().$image_name, $data);

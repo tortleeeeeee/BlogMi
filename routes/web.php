@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //PAGES
-Route::get('/index', [BlogMiController::class, 'index'])->name('index');
+Route::get('/', [BlogMiController::class, 'index'])->name('index');
 Route::get('/blogs', [BlogMiController::class, 'blogs'])->name('blogs');
 Route::get('/profile', [BlogMiController::class, 'profile'])->name('profile');
 

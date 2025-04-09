@@ -31,11 +31,20 @@
     </div>
 
     <script>
+    $(document).ready(function() {
         $('#content').summernote({
             placeholder: 'Write your blog here...',
             tabsize: 2,
-            height: 500
-        })
+            height: 500,
+            callbacks: {
+                onInit: function() {
+                    $('#content').next('.note-editor').find('.note-editable').focus();
+                }
+            }
+        });
+    });
+
+
     </script>
 </body>
 </html>

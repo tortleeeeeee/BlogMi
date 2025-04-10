@@ -31,11 +31,20 @@
         </div>
     </nav>
     <div class="container mt-4">
-        <h1>BLOGS</h1>
+
+        <div class="mb-2">
+            <form action="{{ route('blogs') }}" method="GET" class="d-flex">
+                <input class="form-control me-sm-2" name="searchTitle" type="search" placeholder="Search title">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+
         <table class="table table-hover">
             <thead>
               <tr class="table-primary">
                 <th scope="row">Title</th>
+                <th scope="row">Status</th>
+                <th scope="row">Creation Date</th>
                 <th scope="row" class="col-3">Actions</th>
               </tr>
             </thead>
@@ -43,6 +52,8 @@
               @foreach ($blogs as $blog)
                 <tr class="table-light">
                     <td scope="row">{{ $blog->title }}</td>
+                    <td scope="row">{{ $blog->status }}</td>
+                    <td scope="row">{{ $blog->created_at }}</td>
                     <td scope="row"class="col-3">
                         <a href="{{ route('displayBlog', $blog->id) }}" class="btn btn-info">Display</a>
                         <a href="{{ route('editBlog', $blog->id) }}" class="btn btn-secondary">Edit</a>

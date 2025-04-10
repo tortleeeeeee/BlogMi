@@ -23,9 +23,14 @@
                 @csrf
                 <label for="title" class="form-label mt-4">Title</label>
                 <input class="form-control" name="title" id="title" placeholder="Title...">
+                <label for="title" class="form-label mt-4">Subtitle/Description</label>
+                <input class="form-control" name="subtitle" id="subtitle" placeholder="Gave them an idea about your blog...">
                 <label for="content" class="form-label mt-4">Text Editor</label>
                 <textarea class="form-control" name="content" id="content" cols="30" rows="30"></textarea>
-                <button type="submit" class="btn btn-primary">Publish</button>
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-primary ms-auto" name="status" value="published">Publish</button>
+                    <button type="submit" class="btn btn-warning" name="status" value="draft">Save as draft</button>
+                </div>
             </form>
         </div>
     </div>

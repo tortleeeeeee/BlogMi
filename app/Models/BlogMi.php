@@ -12,6 +12,8 @@ class BlogMi extends Model
     protected $table = 'blogmi';
     protected $fillable = [
         'title',
+        'subtitle',
+        'status',
         'content'
     ];
 }

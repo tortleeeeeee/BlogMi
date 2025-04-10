@@ -16,12 +16,17 @@ class BlogMiController extends Controller
      */
     public function index()
     {
-        $blogs = Blogmi::all();
+        $blogs = Blogmi::all()->where('status', '==', "published");
         return view('blogmi.index', compact('blogs'));
     }
     public function blogs()
     {
         $blogs = BlogMi::all();
+
+        if (request()->has('searchTitle')){
+            $blogs = $blogs->where('title', 'like', request()->get('searchTitle', ''));
+        }
+
         return view('blogmi.blogs', compact('blogs'));
     }
     public function profile()
@@ -60,10 +65,16 @@ class BlogMiController extends Controller
 
         $content = $dom->saveHTML();
 
+        $status = $request->input('status');
+
         $blog = BlogMi::create([
             'title' => $request->title,
+            'subtitle' => $request->subtitle,
+            'status' => $status,
             'content' => $content
         ]);
+
+
 
         return view('blogmi.blog', ['blog'=>$blog]);
     }
@@ -149,4 +160,7 @@ class BlogMiController extends Controller
         $blog->delete();
         return redirect()->back();
     }
+
+
+
 }

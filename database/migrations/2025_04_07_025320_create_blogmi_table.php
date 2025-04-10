@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('blogmi', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('subtitle')->nullable(true);
+            $table->string('status');
             $table->longText('content');
             $table->timestamps();
         });

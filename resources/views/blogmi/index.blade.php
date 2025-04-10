@@ -37,7 +37,7 @@
         <img class="img-fluid w-100 h-100" src="{{ asset('storage/images/blog-cropped.jpeg') }}"/>
     </div>
 
-    <div class="container mt-4">
+    <div class="container mt-4 mb-4">
         <div class="d-flex">
             <a href="{{ route('createBlog') }}" class="btn btn-warning mb-2 ms-auto">Create Blog</a>
         </div>
@@ -50,7 +50,7 @@
                       <img src="{{ asset('storage/images/blog-cropped.jpeg') }}" class="card-img-top" alt="...">
                       <div class="card-body">
                         <h5 class="card-title">{{ $blog->title }}</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">{{ $blog->subtitle}}</p>
                       </div>
                       <div class="card-footer d-flex">
                           <a href="{{ route('displayBlog', $blog->id) }}" class="btn btn-info">Display</a>

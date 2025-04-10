@@ -6,7 +6,8 @@ use App\Models\BlogMi;
 use Illuminate\Http\Request;
 use DOMDocument;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BlogMiController extends Controller
 {
@@ -127,8 +128,25 @@ class BlogMiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BlogMi $blogMi)
+    public function deleteBlog($id)
     {
-        //
+
+        $blog = BlogMi::find($id);
+
+        $dom = new DOMDocument();
+        $dom->loadHTML($blog->content, 9);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $key => $img){
+            $src = $img->getAttribute('src');
+            $path = Str::of($src)->after('/');
+
+            if (File::exists($path)){
+                File::delete($path);
+            }
+        }
+
+        $blog->delete();
+        return redirect()->back();
     }
 }

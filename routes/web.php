@@ -25,3 +25,4 @@ Route::post('/storeBlog', [BlogMiController::class, 'storeBlog'])->name('storeBl
 Route::get('/{blog}', [BlogMiController::class, 'displayBlog'])->name('displayBlog');
 Route::get('/edit/{blog}', [BlogMiController::class, 'editBlog'])->name('editBlog');
 Route::post('/update/{blog}', [BlogMiController::class, 'updateBlog'])->name('updateBlog');
+Route::get('/delete/{blog}', [BlogMiController::class, 'deleteBlog'])->name('deleteBlog');

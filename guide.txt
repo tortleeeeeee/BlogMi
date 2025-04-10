@@ -63,3 +63,31 @@ For editing and updating the blog:
         }
 
     lastly, return redirect('/');
+
+For deleting the blog:
+1. create route and pass the id
+2. in controller use find()
+
+    use Illuminate\Support\Facades\File;
+    use Illuminate\Support\Str;
+
+    $dom = new DOMDocument();
+    $dom->loadHTML($post->content, 9);
+    $images = $dom->getElementsByTagName('img');
+
+    foreach ($images as $key => $img){
+        $src = $img->getElementsByTagName('src');
+        $path = Str::of($src)->after('/');
+
+        if (File::exists($path)){
+            File::delete($path);
+            return 'yes';
+        }
+        else {
+            return 'no';
+        }
+    }
+
+    $post->delete();
+    return redirect()->back();
+

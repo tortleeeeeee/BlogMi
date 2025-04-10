@@ -55,7 +55,7 @@
                       <div class="card-footer d-flex">
                           <a href="{{ route('displayBlog', $blog->id) }}" class="btn btn-info">Display</a>
                           <a href="{{ route('editBlog', $blog->id) }}"class="btn btn-secondary">Edit</a>
-                          <button type="button" class="btn btn-danger">Delete</button>
+                          <a href="{{ route('deleteBlog', $blog->id) }}" class="btn btn-danger">Delete</a>
                       </div>
                     </div>
                   </div>

@@ -8,6 +8,7 @@ use DOMDocument;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class BlogMiController extends Controller
 {
@@ -19,15 +20,22 @@ class BlogMiController extends Controller
         $blogs = Blogmi::all()->where('status', '==', "published");
         return view('blogmi.index', compact('blogs'));
     }
-    public function blogs()
-    {
-        $blogs = BlogMi::all();
+    public function blogs(Request $request)
+    {/*
+        $search_param = $request->query('searchTitle');
+        $search_status = $request->query('searchStatus');
 
-        if (request()->has('searchTitle')){
-            $blogs = $blogs->where('title', 'like', request()->get('searchTitle', ''));
+        if ($search_param){
+            $blogs = BlogMi::search($search_param)->query(fn (Builder $query)=>$query->where('title', 'like', $search_param .'%'))->get();
+        } elseif ($search_status == "draft" || $search_status == "published"){
+            $blogs = BlogMi::search($search_status)->query(fn (Builder $query)=>$query->where('status', $search_status))->get();
+        } else {
+            $blogs = BlogMi::All();
         }
-
+*/
+        $blogs = BlogMi::All();
         return view('blogmi.blogs', compact('blogs'));
+        //return view('blogmi.blogs', compact('blogs', 'search_param', 'search_status'));
     }
     public function profile()
     {
@@ -160,7 +168,5 @@ class BlogMiController extends Controller
         $blog->delete();
         return redirect()->back();
     }
-
-
 
 }

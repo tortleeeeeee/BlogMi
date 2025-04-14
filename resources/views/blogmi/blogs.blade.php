@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blogs</title>
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
@@ -32,14 +35,7 @@
     </nav>
     <div class="container mt-4">
 
-        <div class="mb-2">
-            <form action="{{ route('blogs') }}" method="GET" class="d-flex">
-                <input class="form-control me-sm-2" name="searchTitle" type="search" placeholder="Search title">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-
-        <table class="table table-hover">
+        <table class="table table-hover" id="blogs">
             <thead>
               <tr class="table-primary">
                 <th scope="row">Title</th>
@@ -65,5 +61,14 @@
         </table>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script  src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script  src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js"></script>
+
+    <script>
+        new DataTable('#blogs');
+    </script>
 </body>
 </html>
